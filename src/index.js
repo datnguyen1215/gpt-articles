@@ -1,6 +1,7 @@
+import './alias';
 import 'dotenv/config';
 import config from './config';
-import { createLogger } from './logger';
+import { createLogger } from '@/logger';
 
 const logger = createLogger('index');
 
