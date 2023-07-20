@@ -1,0 +1,23 @@
+{
+  "name": "gpt-articles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch src/ --watch package.json --watch .env --exec babel-node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "openai": "^3.3.0",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.22.6",
+    "@babel/preset-env": "^7.22.9",
+    "nodemon": "^3.0.1"
+  }
+}
