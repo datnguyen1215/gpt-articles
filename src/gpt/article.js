@@ -8,7 +8,7 @@ const logger = createLogger('gpt.article');
 
 const generate = async title => {
   const openai = new OpenAIApi(
-    new Configuration({ apiKey: config().OPENAI_KEY })
+    new Configuration({ apiKey: config.env.OPENAI_KEY })
   );
 
   logger.info(`Generating outline for ${title}...`);

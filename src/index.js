@@ -9,10 +9,11 @@ import path from 'path';
 const logger = createLogger('index');
 
 (async () => {
-  const configuration = config();
-  const article = await gpt.article(configuration.TITLE);
+  logger.info(`Configuration: ${JSON.stringify(config)}`);
 
-  const filePath = path.resolve('@/../articles/', `${configuration.TITLE}.txt`);
+  const article = await gpt.article(config.title);
+
+  const filePath = path.resolve('@/../articles/', `${config.title}.txt`);
 
   logger.info(`Writing article to ${filePath}...`);
   const text =
