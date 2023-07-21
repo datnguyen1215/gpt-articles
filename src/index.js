@@ -8,8 +8,6 @@ import path from 'path';
 
 const logger = createLogger('index');
 
-logger.info(`config: ${JSON.stringify(config())}`);
-
 (async () => {
   const configuration = config();
   const article = await gpt.article(configuration.TITLE);
@@ -24,3 +22,13 @@ logger.info(`config: ${JSON.stringify(config())}`);
 
   fs.writeFileSync(filePath, text);
 })();
+
+process.on('uncaughtException', err => {
+  logger.error(`Uncaught exception: ${err.stack}`);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', err => {
+  logger.error(`Unhandled rejection: ${err.stack}`);
+  process.exit(1);
+});
