@@ -15,6 +15,10 @@ const logger = createLogger('index');
 
   const filePath = path.resolve('@/../articles/', `${config.title}.txt`);
 
+  // create folder if not exist
+  const articleDirectory = path.dirname(filePath);
+  if (!fs.existsSync(articleDirectory)) fs.mkdirSync(articleDirectory);
+
   logger.info(`Writing article to ${filePath}...`);
   const text =
     `Title: ${article.title}\n\n` +
