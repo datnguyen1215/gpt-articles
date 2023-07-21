@@ -25,7 +25,8 @@ const logger = createLogger('index');
     `Outline:\n${article.outline}\n\n` +
     `Content:\n${article.content}\n`;
 
-  fs.writeFileSync(filePath, text);
+  const removeMarkdownRegex = /\*\*(.*)\*\*/gi;
+  fs.writeFileSync(filePath, text.replace(removeMarkdownRegex, '$1'));
 })();
 
 process.on('uncaughtException', err => {
