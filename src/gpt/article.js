@@ -43,6 +43,24 @@ const generate = async title => {
       })
   );
 
+  promises.push(
+    openai.createChatCompletion({
+      model: 'gpt-4',
+      messages: [
+        {
+          role: 'system',
+          content: prompts.personality
+        },
+        {
+          role: 'user',
+          content: prompts.faq
+            .replaceAll('{title}', title)
+            .replaceAll('{outline}', sections.join('\n'))
+        }
+      ]
+    })
+  );
+
   const results = await Promise.all(promises);
   const article = {
     title,
