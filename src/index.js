@@ -37,7 +37,7 @@ const generate = async title => {
 
   if (!fs.existsSync(articleDirectory)) fs.mkdirSync(articleDirectory);
 
-  logger.info(`Writing "${title} to ${filePath}...`);
+  logger.info(`Writing "${title}" to ${filePath}...`);
 
   const text =
     `Title: ${article.title}\n\n` +
