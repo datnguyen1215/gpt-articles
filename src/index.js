@@ -68,6 +68,8 @@ const generate = async title => {
   }
 
   logger.info('Done!');
+
+  if (badTitles.length === 0) return;
   logger.error(`Titles that cannot be generated:\n${badTitles.join('\n')}`);
 })();
 
