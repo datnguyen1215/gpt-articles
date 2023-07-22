@@ -26,6 +26,19 @@ const toChunk = (arr, size) => {
 };
 
 /**
+ * Remove numbers from headings.
+ *  Example:
+ *    ## 9. Heading
+ *    #### 9.1 Heading
+ * @param {string} text
+ * @returns {string}
+ */
+const removeHeadingNumber = text => {
+  const regex = /(#.+?\s)\d+\.(\d+\.?)?\s/gi;
+  return text.replace(regex, '$1');
+};
+
+/**
  * Generate and write an article to a file.
  * @param {string} title
  */
@@ -46,7 +59,7 @@ const generate = async title => {
   const text =
     `Title: ${article.title}\n\n` +
     `Outline:\n${article.outline}\n\n` +
-    `Content:\n${article.content}\n`;
+    `Content:\n${removeHeadingNumber(article.content)}\n`;
 
   const removeMarkdownRegex = /\*\*(.*)\*\*/gi;
 
