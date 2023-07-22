@@ -4,7 +4,7 @@ import { Configuration, OpenAIApi } from 'openai';
 
 const generate = async title => {
   const openai = new OpenAIApi(
-    new Configuration({ apiKey: config.env.OPENAI_KEY })
+    new Configuration({ apiKey: config().env.OPENAI_KEY })
   );
 
   const completion = await openai.createChatCompletion({

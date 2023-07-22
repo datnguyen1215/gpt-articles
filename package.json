@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch src/ --watch package.json --watch .env --exec \"babel-node -- src/index.js\"",
     "start": "babel-node -- src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require @babel/register --require src/alias.js --exit"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,7 @@
   "dependencies": {
     "commander": "^11.0.0",
     "dotenv": "^16.3.1",
+    "mocha": "^10.2.0",
     "module-alias": "^2.2.3",
     "openai": "^3.3.0",
     "winston": "^3.10.0"

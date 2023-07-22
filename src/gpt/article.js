@@ -8,10 +8,10 @@ const logger = createLogger('gpt.article');
 
 const generate = async title => {
   const openai = new OpenAIApi(
-    new Configuration({ apiKey: config.env.OPENAI_KEY })
+    new Configuration({ apiKey: config().env.OPENAI_KEY })
   );
 
-  logger.info(`Generating outline for ${title}...`);
+  logger.info(`Generating outline for "${title}"...`);
   const generatedOutline = await outline(title);
 
   const sections = generatedOutline.outline.map(
@@ -22,7 +22,7 @@ const generate = async title => {
         .join('\n')}`
   );
 
-  logger.info(`Generating article...`);
+  logger.info(`Generating article for "${title}"...`);
   const promises = sections.map(
     async section =>
       await openai.createChatCompletion({
