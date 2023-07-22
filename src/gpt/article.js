@@ -69,6 +69,7 @@ const generate = async title => {
       content: results.map(x => x.data.choices[0].message.content).join('\n')
     };
   } catch (error) {
+    logger.error(`Error generating file ${title}: ${error.message}`);
     return generate(title);
   }
 };
