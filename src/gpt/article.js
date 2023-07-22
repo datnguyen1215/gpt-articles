@@ -7,9 +7,9 @@ import config from '@/config';
 const logger = createLogger('gpt.article');
 
 const generate = async title => {
-  const openai = new OpenAIApi(
-    new Configuration({ apiKey: config().env.OPENAI_KEY })
-  );
+  const { article, env } = config();
+
+  const openai = new OpenAIApi(new Configuration({ apiKey: env.OPENAI_KEY }));
 
   logger.info(`Generating outline for "${title}"...`);
   const generatedOutline = await outline(title);
@@ -26,7 +26,7 @@ const generate = async title => {
   const promises = sections.map(
     async section =>
       await openai.createChatCompletion({
-        model: 'gpt-4',
+        model: article.model,
         messages: [
           {
             role: 'system',
@@ -45,7 +45,7 @@ const generate = async title => {
 
   promises.push(
     openai.createChatCompletion({
-      model: 'gpt-4',
+      model: article.model,
       messages: [
         {
           role: 'system',
@@ -62,12 +62,11 @@ const generate = async title => {
   );
 
   const results = await Promise.all(promises);
-  const article = {
+  return {
     title,
     outline: sections.join('\n'),
     content: results.map(x => x.data.choices[0].message.content).join('\n')
   };
-  return article;
 };
 
 export default generate;

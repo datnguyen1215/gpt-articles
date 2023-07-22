@@ -55,10 +55,10 @@ const generate = async title => {
   // only generate 10 articles at a time. OpenAI limits the GPT 4 API to only
   // 200 requests per minute.
   const { titles } = config();
-  titleChunks = toChunk(titles, 10);
+  const titleChunks = toChunk(titles, 10);
 
   // Run each chunk.
-  for (var chunk in titleChunks) {
+  for (var chunk of titleChunks) {
     const promises = chunk.map(async title => await generate(title));
     await Promise.all(promises);
   }

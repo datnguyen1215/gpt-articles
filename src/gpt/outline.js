@@ -3,12 +3,12 @@ import prompts from '@/prompts';
 import { Configuration, OpenAIApi } from 'openai';
 
 const generate = async title => {
-  const openai = new OpenAIApi(
-    new Configuration({ apiKey: config().env.OPENAI_KEY })
-  );
+  const { outline, env } = config();
+
+  const openai = new OpenAIApi(new Configuration({ apiKey: env.OPENAI_KEY }));
 
   const completion = await openai.createChatCompletion({
-    model: 'gpt-4',
+    model: outline.model,
     messages: [
       {
         role: 'system',
@@ -23,12 +23,7 @@ const generate = async title => {
 
   let answer = completion.data.choices[0].message.content;
 
-  const regex = /```json\s*(.*?)\s*```/s;
-  const match = regex.exec(answer);
-
-  if (!match) return null;
-
-  return JSON.parse(match[1]);
+  return JSON.parse(answer);
 };
 
 export default generate;
