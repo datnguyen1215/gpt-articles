@@ -8,6 +8,25 @@ import path from 'path';
 
 const logger = createLogger('index');
 
+/**
+ * Split an array into chunks of a given size.
+ * @param {any[]} arr
+ * @param {number} size
+ * @returns
+ */
+const toChunk = (arr, size) => {
+  const result = [];
+
+  for (let i = 0; i < arr.length; i += size)
+    result.push(arr.slice(i, i + size));
+
+  return result;
+};
+
+/**
+ * Generate and write an article to a file.
+ * @param {string} title
+ */
 const generate = async title => {
   const article = await gpt.article(title);
 
@@ -33,8 +52,16 @@ const generate = async title => {
 (async () => {
   logger.info(`Configuration: ${JSON.stringify(config())}`);
 
-  const promises = config().titles.map(async title => await generate(title));
-  await Promise.all(promises);
+  // only generate 10 articles at a time. OpenAI limits the GPT 4 API to only
+  // 200 requests per minute.
+  const { titles } = config();
+  titleChunks = toChunk(titles, 10);
+
+  // Run each chunk.
+  for (var chunk in titleChunks) {
+    const promises = chunk.map(async title => await generate(title));
+    await Promise.all(promises);
+  }
 
   logger.info('Done!');
 })();
