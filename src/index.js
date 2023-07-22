@@ -8,6 +8,8 @@ import path from 'path';
 
 const logger = createLogger('index');
 
+const badTitles = [];
+
 /**
  * Split an array into chunks of a given size.
  * @param {any[]} arr
@@ -29,8 +31,8 @@ const toChunk = (arr, size) => {
  */
 const generate = async title => {
   const article = await gpt.article(title);
-  
-  if (!article) return;
+
+  if (!article) return badTitles.push(title);
 
   const filePath = path.resolve('@/../articles/', `${title}.md`);
 
@@ -66,6 +68,7 @@ const generate = async title => {
   }
 
   logger.info('Done!');
+  logger.error(`Titles that cannot be generated:\n${badTitles.join('\n')}`);
 })();
 
 process.on('uncaughtException', err => {
