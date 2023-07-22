@@ -29,6 +29,8 @@ const toChunk = (arr, size) => {
  */
 const generate = async title => {
   const article = await gpt.article(title);
+  
+  if (!article) return;
 
   const filePath = path.resolve('@/../articles/', `${title}.md`);
 

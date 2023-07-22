@@ -6,8 +6,10 @@ import config from '@/config';
 
 const logger = createLogger('gpt.article');
 
-const generate = async title => {
+const generate = async (title, retry = 3) => {
   try {
+    if (retry === 0) return null;
+
     const { article, env } = config();
 
     const openai = new OpenAIApi(new Configuration({ apiKey: env.OPENAI_KEY }));
@@ -70,7 +72,7 @@ const generate = async title => {
     };
   } catch (error) {
     logger.error(`Error generating "${title}": ${error.stack}`);
-    return generate(title);
+    return generate(title, retry - 1);
   }
 };
 
