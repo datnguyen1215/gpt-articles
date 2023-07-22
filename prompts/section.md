@@ -2,4 +2,9 @@ Title: {title}
 
 Outline: {outline}
 
-Write me this section {section}. Provide clear headings, use the exact number from the sections provided. Do not use markdown. Also have the transition sentence for each section to prepare readers for what's coming in the next.
+Here are the guidelines you must follow:
+1. Provide clear headings, use the exact number from the sections provided. Use markdown for headings. For example: 1. Heading uses ##, 1.1 Heading uses ###
+1. At the end of each section, write a transition paragraph to prepare readers for the next section. Do not label it as transition paragraph.
+
+Write me this section:
+{section}
