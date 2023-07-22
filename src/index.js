@@ -30,7 +30,7 @@ const toChunk = (arr, size) => {
 const generate = async title => {
   const article = await gpt.article(title);
 
-  const filePath = path.resolve('@/../articles/', `${title}.txt`);
+  const filePath = path.resolve('@/../articles/', `${title}.md`);
 
   // create folder if not exist
   const articleDirectory = path.dirname(filePath);
