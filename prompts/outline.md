@@ -10,4 +10,9 @@ Your answer must follow JSON format. Here are the descriptions of the field:
 
 Here's an example of your answer: { "title": "how to take care of goldfish", "outline": [ { "type": "heading1", "text": "Introduction", "points": ["Why goldfish are popular pets", "Common misconceptions"] } ] }
 
-Give me an outline this article {title}. Well plan the outlines so they do not repeat within the same article. Outline should be closely related to the title.
+**Guidelines:**
+
+- This is information article.
+- Do not include Introduction and Conclusion in the outline.
+
+**Title:** {title}
