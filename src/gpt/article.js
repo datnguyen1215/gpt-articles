@@ -26,7 +26,29 @@ const generate = async (title, retry = 3) => {
     );
 
     logger.info(`Generating article for "${title}"...`);
-    const promises = sections.map(
+    
+    const promises = [];
+
+    promises.push(
+      openai.createChatCompletion({
+        model: article.model,
+        messages: [
+          {
+            role: 'system',
+            content: prompts.personality
+          },
+          {
+            role: 'user',
+            content: prompts.introduction.replaceAll(
+              '{introduction}',
+              generatedOutline.introduction
+            )
+          }
+        ]
+      })
+    );
+
+    promises.push(...sections.map(
       async section =>
         await openai.createChatCompletion({
           model: article.model,
@@ -44,6 +66,25 @@ const generate = async (title, retry = 3) => {
             }
           ]
         })
+    ))
+
+    promises.push(
+      openai.createChatCompletion({
+        model: article.model,
+        messages: [
+          {
+            role: 'system',
+            content: prompts.personality
+          },
+          {
+            role: 'user',
+            content: prompts.conclusion.replaceAll(
+              '{outline}',
+              sections.join('\n')
+            )
+          }
+        ]
+      })
     );
 
     promises.push(
