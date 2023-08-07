@@ -21,7 +21,9 @@ const generate = async (details, retry = 3) => {
     const openai = new OpenAIApi(new Configuration({ apiKey: env.OPENAI_KEY }));
 
     // separate title and description
-    const [title, description] = details.split('||');
+    let [title, description] = details.split('||');
+    title = title.trim();
+    description = description.trim();
 
     // generate outline
     logger.info(`Generating outline for "${title}"...`);
@@ -131,8 +133,8 @@ const generate = async (details, retry = 3) => {
       content: results.map(x => x.data.choices[0].message.content).join('\n')
     };
   } catch (error) {
-    logger.error(`Error generating "${title}": ${error.stack}`);
-    return generate(title, retry - 1);
+    logger.error(`Error generating "${details}": ${error.stack}`);
+    return generate(details, retry - 1);
   }
 };
 

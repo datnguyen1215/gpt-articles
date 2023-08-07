@@ -47,14 +47,14 @@ const generate = async title => {
 
   if (!article) return badTitles.push(title);
 
-  const filePath = path.resolve('@/../articles/', `${title}.md`);
+  const filePath = path.resolve('@/../articles/', `${article.title}.md`);
 
   // create folder if not exist
   const articleDirectory = path.dirname(filePath);
 
   if (!fs.existsSync(articleDirectory)) fs.mkdirSync(articleDirectory);
 
-  logger.info(`Writing "${title}" to ${filePath}...`);
+  logger.info(`Writing "${article.title}" to ${filePath}...`);
 
   const text =
     `Title: ${article.title}\n\n` +
