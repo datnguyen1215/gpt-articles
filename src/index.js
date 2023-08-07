@@ -58,6 +58,7 @@ const generate = async title => {
 
   const text =
     `Title: ${article.title}\n\n` +
+    `Description: ${article.description}\n\n` +
     `Outline:\n${article.outline}\n\n` +
     `Content:\n${removeHeadingNumber(article.content)}\n`;
 
