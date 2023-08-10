@@ -21,7 +21,7 @@ const generate = async (details, retry = 3) => {
     const openai = new OpenAIApi(new Configuration({ apiKey: env.OPENAI_KEY }));
 
     // separate title and description
-    let [title, description] = details.split('||');
+    let [title, description = ''] = details.split('||');
     title = title.trim();
     description = description.trim();
 
