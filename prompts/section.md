@@ -1,5 +1,7 @@
 Title: {title}
 
+Description: {description}
+
 Outline: {outline}
 
 Here are the guidelines you must follow:
