@@ -12,7 +12,6 @@ Here's an example of your answer: { "title": "how to take care of goldfish", "ou
 
 **Guidelines:**
 
-- This is information article.
 - Do not include Introduction and Conclusion in the outline.
 
 **Title:** {title}

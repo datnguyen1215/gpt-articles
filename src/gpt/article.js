@@ -40,8 +40,8 @@ const generate = async (title, retry = 3) => {
           {
             role: 'user',
             content: prompts.introduction.replaceAll(
-              '{introduction}',
-              generatedOutline.introduction
+              '{outline}',
+              sections.join('\n')
             )
           }
         ]
