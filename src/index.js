@@ -39,6 +39,17 @@ const removeHeadingNumber = text => {
 };
 
 /**
+ * Remove special characters from a string.
+ * @param {string} inputString
+ * @returns {string}
+ */
+function removeSpecialCharacters(inputString) {
+  // Use a regular expression to match any character that is not a letter or a number
+  const cleanedString = inputString.replace(/[^a-zA-Z0-9\s]/g, '');
+  return cleanedString;
+}
+
+/**
  * Generate and write an article to a file.
  * @param {string} title
  */
@@ -47,7 +58,10 @@ const generate = async title => {
 
   if (!article) return badTitles.push(title);
 
-  const filePath = path.resolve('@/../articles/', `${article.title}.md`);
+  const filePath = path.resolve(
+    '@/../articles/',
+    `${removeSpecialCharacters(article.title)}.md`
+  );
 
   // create folder if not exist
   const articleDirectory = path.dirname(filePath);
